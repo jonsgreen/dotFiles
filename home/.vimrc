@@ -3,6 +3,8 @@
   scriptencoding utf-8
   set guifont=Monaco:h16
   set nowrap
+  let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+  colorscheme desert
   
   " These two enable syntax highlighting
   set nocompatible          " We're running Vim, not Vi!
