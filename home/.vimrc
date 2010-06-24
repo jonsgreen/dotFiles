@@ -1,26 +1,34 @@
 " Section: configuration
 
   scriptencoding utf-8
+
   set guifont=Monaco:h16
-  set nowrap
+
   let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
   colorscheme desert
-  
+
   " These two enable syntax highlighting
   set nocompatible          " We're running Vim, not Vi!
   syntax on                 " Enable syntax highlighting
+
   " Enable filetype-specific indenting and plugins
   filetype plugin indent on
+
   " show the `best match so far' as search strings are typed
   set incsearch
+
   " Highlight search results once found:
   set hlsearch
+
   " highlight the current line the cursor is on
-  " set cursorline
+  set cursorline
+
   "sm:    flashes matching brackets or parentheses
   set showmatch
+
   "sta:   helps with backspacing because of expandtab
   set smarttab
+
   " Change <Leader>
   let mapleader = ","
 
@@ -40,10 +48,10 @@
   set wildmode=list:longest,list:full
 
   " Display extra whitespace
-  "set list listchars=tab:»·,trail:·
+  set list listchars=tab:»·,trail:·
 
   " don't make it look like there are line breaks where there aren't:
-  "set nowrap
+  set nowrap
 
   " assume the /g flag on :s substitutions to replace all matches in a line:
   set gdefault
@@ -64,17 +72,12 @@
 
   " enable setting title
   set title
+
   " configure title to look like: Vim /path/to/file
   set titlestring=VIM:\ %-25.55F\ %a%r%m titlelen=70
 
   " Make backspace work in insert mode
   set backspace=indent,eol,start
-
-  " can has foldin plz?
-  set foldenable
-  set foldmethod=syntax
-  set foldlevel=999 " make it really high, so they're not displayed by default
-  
 
   " Turn off rails bits of statusbar
   let g:rails_statusline=0
@@ -145,52 +148,9 @@
   let g:bufExplorerDefaultHelp=0       " Do not show default help.
   let g:bufExplorerShowRelativePath=1  " Show relative paths.
 
-" IRB {{{
-  autocmd FileType irb inoremap <buffer> <silent> <CR> <Esc>:<C-u>ruby v=VIM::Buffer.current;v.append(v.line_number, eval(v[v.line_number]).inspect)<CR>
-
-" Section: functions
-
-  function! s:RunShellCommand(cmdline)
-    botright new
-
-    setlocal buftype=nofile
-    setlocal bufhidden=delete
-    setlocal nobuflisted
-    setlocal noswapfile
-    setlocal nowrap
-    setlocal filetype=shell
-    setlocal syntax=shell
-
-    call setline(1,a:cmdline)
-    call setline(2,substitute(a:cmdline,'.','=','g'))
-    execute 'silent $read !'.escape(a:cmdline,'%#')
-    setlocal nomodifiable
-    1
-  endfunction
-
-  " Open the Rails ApiDock page for the word under cursor, using the 'open'
-  " command
-  function! OpenRailsDoc(keyword)
-    let url = 'http://apidock.com/rails/'.a:keyword
-    exec '!'.g:browser.' '.url
-  endfunction
-
-  " Open the Ruby ApiDock page for the word under cursor, using the 'open'
-  " command
-  function! OpenRubyDoc(keyword)
-    let url = 'http://apidock.com/ruby/'.a:keyword
-    exec '!'.g:browser.' '.url
-  endfunction
-
 " Section: commands
-
   " Shell
   command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-
-  " Ruby code metrics
-  command! -complete=file -nargs=+ Reek :Shell reek <q-args>
-  command! -complete=file -nargs=+ Roodi :Shell roodi <q-args>
-  command! -complete=file -nargs=+ Flog :Shell flog -m -I lib <q-args> 2>/dev/null
 
 " Section: mappings
 
@@ -231,22 +191,5 @@
   " toggle Quickfix window with <leader>q
   map <silent> <leader>q :QFix<CR>
 
-  nnoremap <leader>irb :<C-u>below new<CR>:setfiletype irb<CR>:set syntax=ruby<CR>:set buftype=nofile<CR>:set bufhidden=delete<CR>i
-
-  " Easily lookup documentation on apidock
-  noremap <leader>rb :call OpenRubyDoc(expand('<cword>'))<CR>
-  noremap <leader>rr :call OpenRailsDoc(expand('<cword>'))<CR>
-
   map <C-c>n :cnext<CR>
   map <C-c>p :cprevious<CR>
-
-  function! RspecToMocha()
-    silent! %s/\.stub!\?(/.stubs(/
-    silent! %s/and_return/returns/
-    silent! %s/should_receive/expects/
-    silent! %s/should_not_receive\((.*)\)/expects\1.never
-    silent! %s/and_raise/raises/
-    :w
-  endfunction
-  command! RspecToMocha call RspecToMocha()
-  
