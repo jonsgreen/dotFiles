@@ -5,6 +5,10 @@
   set guifont=Monaco:h16
 
   let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+  let NERDShutUp = 1 " so it doesn't complain about types it doesn't know
+
+  map cc :w !pbcopy
+
   colorscheme desert
 
   " These two enable syntax highlighting
@@ -19,9 +23,6 @@
 
   " Highlight search results once found:
   set hlsearch
-
-  " highlight the current line the cursor is on
-  set cursorline
 
   "sm:    flashes matching brackets or parentheses
   set showmatch

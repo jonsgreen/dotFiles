@@ -14,7 +14,6 @@
   nmap <D-/> ,c<space>
   vmap <D-/> ,c<space>
   imap <D-/> <C-O>,c<space>
-  let NERDShutUp = 1 " so it doesn't complain about types it doesn't know
 
 " bind command-] to shift right
   nmap <D-]> >>
