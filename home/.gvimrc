@@ -6,9 +6,9 @@
   set guioptions-=T
 " fullscreen maximizes vertically AND horizontally
   set fuoptions=maxvert,maxhorz
-  set lines=80
-  set columns=130
-  
+  set lines=999
+  set columns=999
+
 " bind command-/ to toggle comment
 " requires NERD Commenter to be installed: http://www.vim.org/scripts/script.php?script_id=1218
   nmap <D-/> ,c<space>
@@ -27,7 +27,7 @@
 
 " bind command-option-l to toggle line numbers
   nmap <silent> <D-M-l> :set invnumber<CR>
- 
+
 " open tabs with command-<tab number>
   map <silent> <D-1> :tabn 1<CR>
   map <silent> <D-2> :tabn 2<CR>

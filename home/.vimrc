@@ -9,7 +9,9 @@
 
   map cc :w !pbcopy
 
-  colorscheme desert
+  colorscheme default
+  highlight NonText guibg=#060606
+  highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
   " These two enable syntax highlighting
   set nocompatible          " We're running Vim, not Vi!
@@ -50,7 +52,9 @@
 
   " Display extra whitespace
   set list listchars=tab:»·,trail:·
-
+  "
+  " kill whitespace on save
+  autocmd BufWritePre * :%s/\s\+$//e
   " don't make it look like there are line breaks where there aren't:
   set nowrap
 
@@ -63,6 +67,7 @@
   " Nice statusbar
   set laststatus=2
   set statusline=\ "
+  set statusline+=%{fugitive#statusline()}
   set statusline+=%f\ " file name
   set statusline+=[
   set statusline+=%{strlen(&ft)?&ft:'none'}, " filetype
