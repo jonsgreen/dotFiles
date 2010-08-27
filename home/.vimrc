@@ -41,7 +41,7 @@
   " When scrolling off-screen do so 3 lines at a time, not 1
   set scrolloff=3
 
-  " enable line numbers 
+  " enable line numbers
   set number
   setlocal numberwidth=5
 
@@ -120,14 +120,13 @@
     autocmd FileType cucumber set autoindent tabstop=2 shiftwidth=2 softtabstop=2 expandtab
     " markdown goodness
     autocmd BufRead *.mkd  set autoindent formatoptions=tcroqn2 comments=n:>
-    au BufRead,BufNewFile *etc/nginx/* set ft=nginx 
+    au BufRead,BufNewFile *etc/nginx/* set ft=nginx
     " treat rackup files like ruby
     au BufRead,BufNewFile *.ru set ft=ruby
     au BufRead,BufNewFile Gemfile set ft=ruby
-    autocmd BufEnter *.haml setlocal cursorcolumn
-    au BufRead,BufNewFile Gemfile set ft=ruby                                   
-    au BufRead,BufNewFile Capfile set ft=ruby                                   
-    au BufRead,BufNewFile *.god set ft=ruby  
+    au BufRead,BufNewFile Gemfile set ft=ruby
+    au BufRead,BufNewFile Capfile set ft=ruby
+    au BufRead,BufNewFile *.god set ft=ruby
   augroup END
 
 
