@@ -7,7 +7,6 @@
   let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
   let NERDShutUp = 1 " so it doesn't complain about types it doesn't know
 
-  map cc :w !pbcopy
 
   colorscheme default
   highlight NonText guibg=#060606
@@ -16,6 +15,12 @@
   " These two enable syntax highlighting
   set nocompatible          " We're running Vim, not Vi!
   syntax on                 " Enable syntax highlighting
+
+  call pathogen#infect()
+
+  let g:turbux_command_rspec = 'be rspec'
+
+  set colorcolumn=80
 
   " Enable filetype-specific indenting and plugins
   filetype plugin indent on
@@ -34,6 +39,7 @@
 
   " Change <Leader>
   let mapleader = ","
+  nmap <leader>v :SendTestToTmux('')
 
   " Set temporary directory (don't litter local dir with swp/tmp files)
   set directory=/tmp/
@@ -55,6 +61,7 @@
   "
   " kill whitespace on save
   autocmd BufWritePre * :%s/\s\+$//e
+  map <leader>H :%s/:\([^ ]*\)\(\s*\)=>/\1:/g
   " don't make it look like there are line breaks where there aren't:
   set nowrap
 
@@ -164,10 +171,12 @@
   nmap <leader>tp :tabprevious<CR>
   nmap <leader>te :tabedit
 
-  " Remap F1 from Help to ESC.  No more accidents.
+  " R
+  " map F2 from Help to ESC.  No more accidents.
   nmap <F1> <Esc>
   map! <F1> <Esc>
   imap ii <Esc>
+  map <leader>H :%s/:\([^ ]*\)\(\s*\)=>/\1:/gc
 
   " insert hashrocket, =>, with control-l
   imap <C-l> <Space>=><Space>
@@ -198,3 +207,7 @@
 
   map <C-c>n :cnext<CR>
   map <C-c>p :cprevious<CR>
+
+  map cc :w !pbcopy
+  map pp "*p
+  map ; :
